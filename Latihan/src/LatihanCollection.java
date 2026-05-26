@@ -298,7 +298,7 @@ public class LatihanCollection {
             }
         }
 
-        // Menampilkan buku yang sedang dipinjam
+        // Menampilkan daftar buku dipinjam
         System.out.println(
                 "\nDaftar Buku Sedang Dipinjam"
         );
@@ -307,6 +307,54 @@ public class LatihanCollection {
                 : bukuSedangDipinjam) {
 
             System.out.println(isbn);
+        }
+
+        // Soal 5
+
+        System.out.println("\nSOAL 5");
+
+        // ArrayList digunakan agar data bisa disorting
+        ArrayList<Buku> laporanBukuDipinjam =
+                new ArrayList<>();
+
+        // Mengambil object buku dari ISBN yang sedang dipinjam
+        for (String isbn
+                : bukuSedangDipinjam) {
+
+            laporanBukuDipinjam.add(
+                    katalogBuku.get(isbn)
+            );
+        }
+
+        // Sorting berdasarkan judul buku A-Z
+        Collections.sort(
+                laporanBukuDipinjam,
+                new Comparator<Buku>() {
+
+                    @Override
+                    public int compare(
+                            Buku bukuPertama,
+                            Buku bukuKedua
+                    ) {
+
+                        return bukuPertama.judul.compareTo(
+                                bukuKedua.judul
+                        );
+                    }
+                }
+        );
+
+        // Menampilkan laporan buku dipinjam
+        System.out.println(
+                "Laporan Buku Sedang Dipinjam"
+        );
+
+        for (Buku buku
+                : laporanBukuDipinjam) {
+
+            buku.tampilkanBuku();
+
+            System.out.println();
         }
     }
 }
